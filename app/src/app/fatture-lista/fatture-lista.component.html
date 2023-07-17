@@ -1,0 +1,40 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
+    <li class="breadcrumb-item active">Fatture</li>
+  </ol>
+</nav>
+
+<a (click)="caricaFatture()" mat-raised-button color="primary" style="float: right" id="add">Aggiorna Lista</a>
+
+<h2>{{title}}</h2>
+<div *ngIf="loading; else list">
+  <p>Caricamento...</p>
+</div>
+
+<ng-template #list>
+  <table mat-table [dataSource]="fatture">   
+    <ng-container matColumnDef="nome">
+      <mat-header-cell *matHeaderCellDef> Nome File </mat-header-cell>
+      <mat-cell *matCellDef="let fattura"> {{ fattura.nomeFile }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="numero">
+      <mat-header-cell *matHeaderCellDef> Numero Fattura </mat-header-cell>
+      <mat-cell *matCellDef="let fattura"> {{ fattura.numeroFattura }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="data">
+      <mat-header-cell *matHeaderCellDef> Data Fattura </mat-header-cell>
+      <mat-cell *matCellDef="let fattura"> {{ fattura.dataFattura }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="tipo">
+      <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+      <mat-cell *matCellDef="let fattura"> {{ fattura.tipo }} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="stato">
+      <mat-header-cell *matHeaderCellDef> Stato </mat-header-cell>
+      <mat-cell *matCellDef="let fattura"> {{ fattura.stato }} </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </table>
+</ng-template>
